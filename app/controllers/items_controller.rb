@@ -50,15 +50,15 @@ class ItemsController < ApplicationController
                                  :prefecture_id, :price, :image).merge(user_id: current_user.id)
   end
 
-  def set_item
-    @item = Item.find(params[:id])
-  end
+  #def set_item
+    #@item = Item.find(params[:id])
+  #end
 
-  def item_edit
-    redirect_to root_path unless current_user == @item.user
-  end
+  #def item_edit
+    #redirect_to root_path unless current_user == @item.user
+  #end
 
-  def sold_out
-    redirect_to root_path unless @item.buyer.nil?
-  end
+  #def sold_out
+    #redirect_to root_path unless @item.buyer.nil?
+  #end
 end
