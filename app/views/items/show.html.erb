@@ -7,7 +7,7 @@
       <%= "＠item.name" %>
     </h2>
     <div class="item-img-content">
-      <%= image_tag "item-sample.png" ,class:"item-box-img" %>
+      <%= image_tag @item.image ,class:"item-box-img" %>
       <%# 商品が売れている場合は、sold outを表示しましょう %>
       <div class="sold-out">
         <span>Sold Out!!</span>
@@ -16,7 +16,7 @@
     </div>
     <div class="item-price-box">
       <span class="item-price">
-        ¥ 999,999,999
+      <span class="item-price">
       </span>
       <span class="item-postage">
         <%= "delivery_charge.name" %>
@@ -24,17 +24,14 @@
     </div>
 
    <% if user_signed_in? %>
-    <%  if current_user.id == @item.user_id  %>
-      <%= link_to "#", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
-      <p class="#">or</p>
-      <%= link_to "#", item_path(@item.id), method: :delete, class:"item-destroy" %>
+   <%  if current_user.id == @item.user_id && @item.buyer == nil %>
+    <%= link_to "商品の編集", #, method: :get, class: "item-red-btn" %>
+    <p class="or-text">or</p>
+    <%= link_to "削除", #, method: :delete, class:"item-destroy" %>
       <% else %>
-      <%= link_to "#", root_path ,class:"item-red-btn"%>
+      <%= link_to "購入画面に進む", root_path ,class:"item-red-btn"%>
     <% end %>
   <% end %>
-
-     <%# 購入で使用する <% if user_signed_in? && @item.buyer == nil %> 
-    <%# //ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
 
     <div class="item-explain-box">
       <span><%= @item.introduction %></span>
@@ -102,9 +99,9 @@
       後ろの商品 ＞
     </a>
   </div>
-  <%# 詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
+
   <a href="#" class="another-item"><%= @item.category.name %>をもっと見る</a>
-  <%# //詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
+
 </div>
 
 <%= render "shared/footer" %>
